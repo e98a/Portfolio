@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Front-End Developer Portfolio</title>
+<style>
+  /* Reset & base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    background: #0f172a;
+    color: #e0e7ff;
+  }
+  body {
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: #7dd3fc;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
+  main {
+    flex: 1 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid #334155;
+    z-index: 1000;
+  }
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: default;
+  }
+  nav a {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  nav a:focus-visible {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 2px;
+  }
+  nav a:hover {
+    color: #38bdf8;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 96px 0 96px 0;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 72px auto;
+  }
+  .hero h1 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 1.3125rem;
+    color: #94a3b8;
+  }
+
+  /* Section Titles */
+  h2.section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+    color: #38bdf8;
+  }
+
+  /* About Section */
+  .about {
+    max-width: 800px;
+    margin: 0 auto 96px auto;
+    font-size: 1.125rem;
+    color: #cbd5e1;
+    line-height: 1.8;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 24px;
+    margin-bottom: 96px;
+  }
+  .project-card {
+    background: rgba(15,23,42,0.8);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 0 8px rgb(14 165 233 / 0.4);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover,
+  .project-card:focus-within {
+    box-shadow: 0 0 20px rgb(14 165 233 / 0.7);
+    transform: translateY(-6px);
+  }
+  .project-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    object-fit: cover;
+  }
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #38bdf8;
+  }
+  .project-desc {
+    flex-grow: 1;
+    color: #94a3b8;
+    margin-bottom: 16px;
+  }
+  .project-links a {
+    font-weight: 700;
+    margin-right: 12px;
+    font-size: 0.9rem;
+  }
+
+  /* Skills Section */
+  .skills {
+    max-width: 900px;
+    margin: 0 auto 96px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+  .skill {
+    background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    color: #f0f9ff;
+    box-shadow: 0 3px 8px rgb(14 165 233 / 0.7);
+    user-select: none;
+    transition: transform 0.3s ease;
+  }
+  .skill:hover {
+    transform: scale(1.05);
+  }
+
+  /* Contact Section */
+  .contact-form {
+    max-width: 480px;
+    margin: 0 auto 96px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .contact-form label {
+    font-weight: 600;
+    color: #cbd5e1;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    background: #1e293b;
+    color: #e0e7ff;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: 3px solid #38bdf8;
+    background: #334155;
+  }
+  .contact-form button {
+    padding: 14px 0;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.125rem;
+    background: linear-gradient(135deg,#06b6d4,#0ea5e9);
+    color: #f0f9ff;
+    transition: background 0.3s ease;
+  }
+  .contact-form button:hover,
+  .contact-form button:focus-visible {
+    background: linear-gradient(135deg,#0ea5e9,#06b6d4);
+  }
+
+  /* Footer */
+  footer {
+    background: #0f172a;
+    border-top: 1px solid #334155;
+    color: #64748b;
+    padding: 24px 12px;
+    text-align: center;
+    font-size: 0.9rem;
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: 2.8rem;
+    }
+    main {
+      padding: 32px 16px;
+    }
+    nav a {
+      margin-left: 12px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body>
+<header>
+  <div class="nav-container" role="banner">
+    <div class="logo" aria-label="Portfolio logo">Phalla Sroen</div>
+    <nav aria-label="Primary navigation">
+      <a href="#about" tabindex="0">About</a>
+      <a href="#projects" tabindex="0">Projects</a>
+      <a href="#skills" tabindex="0">Skills</a>
+      <a href="#contact" tabindex="0">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" role="region" aria-labelledby="hero-heading">
+    <h1 id="hero-heading">Hi, I'm Phalla</h1>
+    <p>Front-End Developer passionate about creating beautiful, performant and accessible websites.</p>
+  </section>
+
+  <section id="about" aria-labelledby="about-heading">
+    <h2 class="section-title" id="about-heading">About Me</h2>
+    <div class="about">
+      <p>
+        I'm a front-end developer with a passion for building modern web applications. I specialize in responsive design,
+        user-friendly interfaces, and efficient, maintainable code. I enjoy learning new technologies and continuously improving my skills.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-heading">
+    <h2 class="section-title" id="projects-heading">Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ca79b8f5-dd9a-4c19-ae60-957a62a0611e.png" alt="Screenshot of Project 1 homepage" />
+        <h3 class="project-title">Project One</h3>
+        <p class="project-desc">A responsive web app that helps users manage their tasks efficiently.</p>
+        <div class="project-links">
+          <a href="https://github.com/yourusername/project-one" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository link for Project One">GitHub</a>
+          <a href="https://projectone.example.com" target="_blank" rel="noopener noreferrer" aria-label="Live demo link for Project One">Live Demo</a>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4fc60760-db1f-4f55-9af0-6405e521aef8.png" alt="Screenshot of Project 2 homepage" />
+        <h3 class="project-title">Project Two</h3>
+        <p class="project-desc">An interactive portfolio site showcasing design and development work.</p>
+        <div class="project-links">
+          <a href="https://github.com/yourusername/project-two" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository link for Project Two">GitHub</a>
+          <a href="https://projecttwo.example.com" target="_blank" rel="noopener noreferrer" aria-label="Live demo link for Project Two">Live Demo</a>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4920a121-cfe6-49da-9006-a2df1408dd0e.png" alt="Screenshot of Project 3 homepage" />
+        <h3 class="project-title">Project Three</h3>
+        <p class="project-desc">A weather app built using React with real-time API data integration.</p>
+        <div class="project-links">
+          <a href="https://github.com/yourusername/project-three" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository link for Project Three">GitHub</a>
+          <a href="https://projectthree.example.com" target="_blank" rel="noopener noreferrer" aria-label="Live demo link for Project Three">Live Demo</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-heading">
+    <h2 class="section-title" id="skills-heading">Skills</h2>
+    <div class="skills" role="list">
+      <div class="skill" role="listitem">HTML5</div>
+      <div class="skill" role="listitem">CSS3</div>
+      <div class="skill" role="listitem">JavaScript (ES6+)</div>
+      <div class="skill" role="listitem">React</div>
+      <div class="skill" role="listitem">Git & GitHub</div>
+      <div class="skill" role="listitem">Responsive Design</div>
+      <div class="skill" role="listitem">Accessibility</div>
+      <div class="skill" role="listitem">Webpack & Babel</div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-heading">
+    <h2 class="section-title" id="contact-heading">Contact Me</h2>
+    <form class="contact-form" aria-label="Contact form" onsubmit="event.preventDefault(); alert('Message sent! Thank you for reaching out.'); this.reset();">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Write your message here"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div>© 2025 Phalla Sroen. All rights reserved.</div>
+  <div style="margin-top:8px;">
+    <a href="https://github.com/e98a" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" style="margin-right:16px;">
+      <span class="material-icons" aria-hidden="true" style="vertical-align:middle;">code</span> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/phalla-sroen-b084b51a6/?trk=public-profile-join-page" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+      <span class="material-icons" aria-hidden="true" style="vertical-align:middle;">business_center</span> LinkedIn
+    </a>
+  </div>
+</footer>
+</body>
+</html>
+
